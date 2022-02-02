@@ -18,6 +18,7 @@ class UserRepository(AbstractBaseRepository[User]):
         try:
             data = data.dict()
             data.update(hashed_password=get_password_hash(data["password"]))
+            del data["password"]
             return await super().create(data=data)
         except (TypeError, ValueError) as e:
             raise RepositoryException from e

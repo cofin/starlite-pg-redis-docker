@@ -53,5 +53,7 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_PASSWORD: str
     USERS_OPEN_REGISTRATION: bool = False
 
+    DEVELOPMENT: bool = False
+
 
 settings = Settings()

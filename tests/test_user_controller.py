@@ -2,7 +2,7 @@ from starlette.status import HTTP_201_CREATED
 from starlite import TestClient
 
 from app.constants import USER_CONTROLLER_PATH
-from tests.factories import UserCreateDTOFactory
+from app.utils.factories import UserCreateDTOFactory
 
 
 def test_create_user(test_client: TestClient):

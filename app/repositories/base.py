@@ -19,9 +19,9 @@ class AbstractBaseRepository(ABC, Generic[T]):
     model: type[T]
 
     @staticmethod
-    def session_maker() -> sessionmaker:
+    def session_maker() -> AsyncSession:
         engine = get_postgres_connection()
-        return sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+        return AsyncSession(engine, expire_on_commit=False)
 
     @classmethod
     async def get_many(cls, *, offset: int = 0, limit: int = 100) -> list[T]:
@@ -45,15 +45,14 @@ class AbstractBaseRepository(ABC, Generic[T]):
     async def create(cls, data: BaseModel | dict[str, Any]) -> T | None:
         try:
             async with cls.session_maker() as async_session:
-                async with async_session.begin():
-                    if isinstance(data, BaseModel):
-                        data = data.dict()
-                    instance = cls.model(**data)
-                    async_session.add(instance)
-                    await async_session.commit()
-                    await async_session.refresh(instance)
-                    await async_session.dispose()
-                    return cast(T, instance)
+                if isinstance(data, BaseModel):
+                    data = data.dict()
+                instance = cls.model(**data)
+                async_session.add(instance)
+                await async_session.commit()
+                await async_session.refresh(instance)
+                await async_session.dispose()
+                return cast(T, instance)
         except SQLAlchemyError as e:
             raise RepositoryException("Unable to create instance") from e
 
