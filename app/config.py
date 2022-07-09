@@ -1,4 +1,9 @@
-from pydantic import AnyUrl, BaseSettings, PostgresDsn
+from pydantic import AnyUrl, BaseSettings as PydanticBaseSettings, PostgresDsn
+
+
+class BaseSettings(PydanticBaseSettings):
+    class Config:
+        env_file = ".env"
 
 
 class AppSettings(BaseSettings):

@@ -11,13 +11,16 @@ python = "^3.10"
 alembic = "^1.7"
 asyncpg = "^0.25"
 gunicorn = "^20.1"
-passlib = "^1.7"
-pydantic = "^1.9"
+passlib = { extras = ["bcrypt"], version = ">=1.7.4" }
+pydantic = {extras = ["dotenv"], version = "^1.9.1"}
 redis = "^4.3"
+hiredis = "^2.0"
 sentry-sdk = "^1.5"
 sqlalchemy = "^1.4"
 uvicorn = {extras = ["standard"], version = "^0.17"}
-starlite = "1.4.0"
+uvloop = "^0.16.0"
+starlite = "*"
+greenlet = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -90,9 +93,23 @@ disable = [
     "duplicate-code",
 ]
 enable = "useless-suppression"
+extension-pkg-whitelist = ["pydantic"]
 
 [tool.pylint.REPORTS]
 reports = "no"
 
 [tool.pylint.FORMAT]
 max-line-length = "88"
+
+[tool.pylint.DESIGN]
+max-args = 15
+max-attributes = 20
+max-locals = 30
+max-returns = 15
+max-branches = 15
+
+[tool.pylint.VARIABLES]
+ignored-argument-names = "args|kwargs|_|__"
+
+[tool.pylint.BASIC]
+good-names = "_,i,e,fn"
