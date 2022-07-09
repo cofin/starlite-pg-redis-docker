@@ -1,4 +1,6 @@
-from pydantic import AnyUrl, BaseSettings as PydanticBaseSettings, PostgresDsn
+from pydantic import AnyUrl
+from pydantic import BaseSettings as PydanticBaseSettings
+from pydantic import PostgresDsn
 
 
 class BaseSettings(PydanticBaseSettings):
@@ -44,9 +46,10 @@ class GunicornSettings(BaseSettings):
     KEEPALIVE: int
     LOG_LEVEL: str
     PORT: int
-    RELOAD: str
+    RELOAD: bool
     THREADS: int
     TIMEOUT: int
+    PRELOAD: bool
     WORKERS: int
     WORKER_CLASS: str
 
