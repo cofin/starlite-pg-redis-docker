@@ -132,7 +132,7 @@ RUN rm /bin/sh /bin/echo /bin/rm
 
 ## --------------------------- standardise execution env ----------------------------- ##
 
-COPY --chown=${NONROOT_USER}:${NONROOT_GROUP}  --from=python-build-stage /workspace/.venv  /workspace/.venv
+COPY --chown=${NONROOT_USER}:${NONROOT_GROUP} --from=python-build-stage /workspace/.venv  /workspace/.venv
 COPY --chown=${NONROOT_USER}:${NONROOT_GROUP} --from=python-build-stage /workspace/dist  /workspace/dist
 COPY --chown=${NONROOT_USER}:${NONROOT_GROUP}  ./poetry.lock ./pyproject.toml  /code/
 # default to running as non-root
@@ -144,5 +144,5 @@ ENV LC_ALL C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 
-ENTRYPOINT ["/usr/local/bin/python"]
+ENTRYPOINT ["/workerspace/.venv/bin/python"]
 CMD ["-m","uvicorn","app:app","--reload","--log-level","info","--workers","1"]
