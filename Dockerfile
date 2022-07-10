@@ -128,13 +128,14 @@ RUN echo "${NONROOT_USER}:x:${NONROOT_UID}:${NONROOT_GID}::/workspace:" >> /etc/
 # quick validation that python still works whilst we have a shell
 RUN python --version
 
-RUN rm /bin/sh /bin/echo /bin/rm
+# RUN rm /bin/sh /bin/echo /bin/rm
 
 ## --------------------------- standardise execution env ----------------------------- ##
 
 COPY --chown=${NONROOT_USER}:${NONROOT_GROUP} --from=python-build-stage /workspace/.venv  /workspace/.venv
 COPY --chown=${NONROOT_USER}:${NONROOT_GROUP} --from=python-build-stage /workspace/dist  /workspace/dist
-COPY --chown=${NONROOT_USER}:${NONROOT_GROUP}  ./poetry.lock ./pyproject.toml  /code/
+COPY --chown=${NONROOT_USER}:${NONROOT_GROUP}  ./poetry.lock ./pyproject.toml  /workspace/
+COPY --chown=${NONROOT_USER}:${NONROOT_GROUP} . /workspace/
 # default to running as non-root
 USER ${NONROOT_USER}
 
@@ -144,5 +145,5 @@ ENV LC_ALL C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 
-ENTRYPOINT ["/workerspace/.venv/bin/python"]
+ENTRYPOINT ["/usr/local/bin/python"]
 CMD ["-m","uvicorn","app:app","--reload","--log-level","info","--workers","1"]
