@@ -10,6 +10,7 @@ from .base import Base, BaseModel
 
 class User(Base):
     username = Column(String(64), nullable=False)
+    email = Column(String(64), nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
     hashed_password = Column(String(256), nullable=False)
 

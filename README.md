@@ -1,5 +1,3 @@
-<img alt="Starlite logo" src="./static/starlite-banner.svg" width="100%" height="auto">
-
 # starlite-pg-redis-docker
 
 A WIP Starlite API Implementation.
@@ -9,12 +7,12 @@ A WIP Starlite API Implementation.
 - [ ] Header/cookie parameter example.
 - [ ] CI?
 - [ ] Profile
-- [ ] Profile alternate UUID implementation (https://github.com/MagicStack/py-pgproto/blob/a4178145cd7cc3a44eee20cfc9e8b94a7fed2053/uuid.pyx)
+- [ ] Profile alternate UUID implementation (<https://github.com/MagicStack/py-pgproto/blob/a4178145cd7cc3a44eee20cfc9e8b94a7fed2053/uuid.pyx>)
 - [ ] Gunicorn logconfig ignore sqlalchemy.engine logs
 - [ ] explicitly include any dirs/files into docker and remove .dockerignore
 - [ ] add pre-commit (I'll just make as equivalent as possible to the original pre-commit config in this project)
 - [ ] configure pyupgrade for only --py310-plus
-- [ ] use the Dockerfile from https://gist.github.com/Goldziher/942f4a027a7fa1e2cafaa35e0333b6dc
+- [ ] use the Dockerfile from <https://gist.github.com/Goldziher/942f4a027a7fa1e2cafaa35e0333b6dc>
 - [ ] remove black and isort from alembic hooks
 - [ ] map docker ports to service defaults
 - [ ] add pylint into tooling

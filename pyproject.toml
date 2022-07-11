@@ -3,7 +3,7 @@ name = "starlite-pg-redis-docker"
 version = "0.1.0"
 description = "An example Starlite stack with Redis, Postgres and Docker"
 authors = ["yudjinn <yudjinncoding@gmail.com>", "Peter Schutt <peter.github@proton.me>"]
-packages = [{include = "app" }]
+packages = [{include = "app", from = "src/" }]
 license = "MIT"
 
 [tool.poetry.dependencies]
@@ -19,8 +19,10 @@ sentry-sdk = "^1.5"
 sqlalchemy = "^1.4"
 uvicorn = {extras = ["standard"], version = "^0.17"}
 uvloop = "^0.16.0"
-starlite = {extras = ["brotli"], version = "*"}
+starlite = {extras = ["brotli"], version = "^1.5.4"}
 greenlet = "^1.1.2"
+typer = "^0.5.0"
+rich = "^12.4.4"
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -34,14 +36,45 @@ sqlalchemy2-stubs = "*"
 types-passlib = "*"
 types-redis = "*"
 types-requests = "*"
+dirty-equals =  "*"
+isort =  "*"
+flake8 =  "*"
+flake8-type-checking =  "*"
+pyupgrade =  "*"
+blacken-docs =  "*"
+bandit =  "*"
+flake8-bugbear = "*"
+flake8-comprehensions = "*"
+flake8-mutable =  "*"
+flake8-print =  "*"
+flake8-simplify =  "*"
+slotscheck =  "*"
+types-freezegun =  "*"
 
 [tool.poetry.scripts]
 pg-ready = "app.utils.postgres_ready:main"
 redis-ready = "app.utils.redis_ready:main"
+starlite = "app:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120 # default length for black is 88
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | venv
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
 
 [tool.isort]
 profile = "black"
@@ -80,6 +113,8 @@ addopts = "--cov=app -v --doctest-modules --doctest-glob=*.md"
 markers = [
     "no_auto_patch_user",
 ]
+testpaths = ["tests"]
+asyncio_mode = "auto"
 
 [tool.pylint.MESSAGE_CONTROL]
 disable = [
@@ -94,6 +129,7 @@ disable = [
 ]
 enable = "useless-suppression"
 extension-pkg-whitelist = ["pydantic"]
+ignored-modules = ["alembic.op"]
 
 [tool.pylint.REPORTS]
 reports = "no"
