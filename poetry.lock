@@ -870,7 +870,7 @@ pyasn1 = ">=0.1.3"
 
 [[package]]
 name = "saq"
-version = "0.9.0"
+version = "0.9.2"
 description = "Distributed Python job queue with asyncio and redis"
 category = "main"
 optional = false
@@ -878,10 +878,10 @@ python-versions = "*"
 
 [package.dependencies]
 croniter = ">=0.3.18"
-redis = ">=4.2.0"
+redis = ">=4.2,<4.4"
 
 [package.extras]
-dev = ["black (==22.3.0)", "pylint"]
+dev = ["black", "mypy", "pylint", "types-croniter", "types-redis", "types-setuptools"]
 hiredis = ["redis[hiredis] (>=4.2.0)"]
 web = ["aiohttp", "aiohttp-basicauth"]
 
@@ -948,7 +948,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "SQLAlchemy"
-version = "2.0.0b3.dev0"
+version = "2.0.0b5.dev0"
 description = "Database Abstraction Library"
 category = "main"
 optional = false
@@ -957,14 +957,14 @@ develop = false
 
 [package.dependencies]
 greenlet = {version = "!=0.4.17", markers = "platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\""}
-typing-extensions = ">=4.1.0"
+typing-extensions = ">=4.2.0"
 
 [package.extras]
 aiomysql = ["aiomysql", "greenlet (!=0.4.17)"]
 aiosqlite = ["aiosqlite", "greenlet (!=0.4.17)", "typing-extensions (!=3.10.0.1)"]
 asyncio = ["greenlet (!=0.4.17)"]
 asyncmy = ["asyncmy (>=0.2.3,!=0.2.4)", "greenlet (!=0.4.17)"]
-mariadb-connector = ["mariadb (>=1.0.1,!=1.1.2)"]
+mariadb-connector = ["mariadb (>=1.0.1,!=1.1.2,!=1.1.5)"]
 mssql = ["pyodbc"]
 mssql-pymssql = ["pymssql"]
 mssql-pyodbc = ["pyodbc"]
@@ -986,7 +986,7 @@ sqlcipher = ["sqlcipher3-binary"]
 type = "git"
 url = "https://github.com/sqlalchemy/sqlalchemy.git"
 reference = "main"
-resolved_reference = "af9d3ab9b8a0aaa43e9347fd251a087eebd71e1d"
+resolved_reference = "0f5b3040a419fad404d3e2ea8abfb781be228066"
 
 [[package]]
 name = "starlette"
@@ -1950,8 +1950,8 @@ rsa = [
     {file = "rsa-4.9.tar.gz", hash = "sha256:e38464a49c6c85d7f1351b0126661487a7e0a14a50f1675ec50eb34d4f20ef21"},
 ]
 saq = [
-    {file = "saq-0.9.0-py3-none-any.whl", hash = "sha256:0056ad4d42f639eb5c2d575326ae8ce7ffdec05b8ceeafb83de6e73ccff6fec5"},
-    {file = "saq-0.9.0.tar.gz", hash = "sha256:73c316c3e7b90e6e4546dec3c4d15926d85b70a71b2fd23df78723ae6a2803e8"},
+    {file = "saq-0.9.2-py3-none-any.whl", hash = "sha256:9ae0636f8ffe92fa5a9ee68a92828a562d5f0f241762ddf9744df694e33a4ab5"},
+    {file = "saq-0.9.2.tar.gz", hash = "sha256:d0ad2994e7ae11337dc6481e7065399aa02f3d8923b1d9fdde1e02697de8d976"},
 ]
 sentry-sdk = [
     {file = "sentry-sdk-1.10.1.tar.gz", hash = "sha256:105faf7bd7b7fa25653404619ee261527266b14103fe1389e0ce077bd23a9691"},
